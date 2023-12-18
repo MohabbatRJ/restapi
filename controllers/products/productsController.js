@@ -62,8 +62,7 @@ const getAllProductsTesting = async (req, res) => {
     const { company, name, featured, sort, select, page, limit } = req.query;
     
     const queryObject = {}
-    let apiProductData = productsModel.find(queryObject);
-
+    
     if (company) {
         queryObject.company = company;
     }
@@ -73,6 +72,7 @@ const getAllProductsTesting = async (req, res) => {
     if (featured) {
         queryObject.featured = featured;
     }
+    let apiProductData = productsModel.find(queryObject);
 
     if (sort) {
         let sortFix = sort.split(',').join(' ');
@@ -102,7 +102,7 @@ const getAllProductsTesting = async (req, res) => {
                 );
         }
         
-        res.status(200).json({ allProducts, nbHits: allProducts.length })
+        res.status(200).json(allProducts);
     }
     catch (error) {
         res.status(500).json(
